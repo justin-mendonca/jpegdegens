@@ -1,5 +1,4 @@
 import { ethers } from "hardhat";
-import { expect } from "chai";
 
 // test the HelloWorld contract
 describe("TestGas", function() {
