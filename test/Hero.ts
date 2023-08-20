@@ -18,6 +18,10 @@ describe('TestHero', function () {
     hero = await createHero()
   })
 
+  it("Should get a zero hero array.", async () => {
+    expect(await hero.getHeroes()).to.deep.equal([])
+  })
+
   it("Should fail to create a hero when insufficient funds are sent to the contract", async () => {
     let expectedError;
 

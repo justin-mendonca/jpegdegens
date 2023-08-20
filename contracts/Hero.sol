@@ -7,9 +7,9 @@ contract Hero {
     mapping(address => uint[]) addressToHeroes;
 
     function getHeroes() public view returns (uint[] memory) {
-
+        return addressToHeroes[msg.sender];
     }
-    
+
     function createHero(Class) public payable {
         require(msg.value >= 0.05 ether, "Insufficient funds: Please send required payment");
     }
