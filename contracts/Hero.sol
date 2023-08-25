@@ -6,7 +6,7 @@ contract Hero {
 
     mapping(address => uint[]) addressToHeroes;
 
-    function generateRandom() public view returns (uint) {
+    function generateRandom() public virtual view returns (uint) {
         return uint(keccak256(abi.encodePacked(block.timestamp)));
     }
 
@@ -14,27 +14,27 @@ contract Hero {
         return addressToHeroes[msg.sender];
     }
 
-    function getStrength(uint hero) public pure returns (uint) {
-        return (hero >> 2) & 0x1F;
+    function getStrength(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 2) & 0x1F);
     }
 
-    function getHealth(uint hero) public pure returns (uint) {
-        return (hero >> 7) & 0x1F;
+    function getHealth(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 7) & 0x1F);
     }
 
-    function getDex(uint hero) public pure returns (uint) {
-        return (hero >> 12) & 0x1F;
+    function getDex(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 12) & 0x1F);
     }
 
-    function getIntellect(uint hero) public pure returns (uint) {
-        return (hero >> 17) & 0x1F;
+    function getIntellect(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 17) & 0x1F);
     }
 
-    function getMagic(uint hero) public pure returns (uint) {
-        return (hero >> 22) & 0x1F;
+    function getMagic(uint hero) public pure returns (uint32) {
+        return uint32((hero >> 22) & 0x1F);
     }
 
-    function createHero(Class class) public payable {
+    function createHero(Class heroClass) public payable {
         require(msg.value >= 0.05 ether, "Insufficient funds: Please send required payment");
     
         uint[] memory stats = new uint[](5);
@@ -47,7 +47,7 @@ contract Hero {
 
         uint len = 5;
 
-        uint hero = uint(class);
+        uint hero = uint(heroClass);
 
         while (len > 0) {
             uint position = generateRandom() % len;
